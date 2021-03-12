@@ -17,7 +17,7 @@ Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')-
 Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
 
 // Dashboard
-Route::get('/')->name('dashboard')->uses('DashboardController')->middleware('auth');
+Route::get('/')->name('dashboard')->uses('ContactsController@index')->middleware('auth');
 
 // Users
 Route::get('users')->name('users')->uses('UsersController@index')->middleware('remember', 'auth');

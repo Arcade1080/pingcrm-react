@@ -18,16 +18,19 @@ class ContactsController extends Controller
 {
     public function index()
     {
+
+        $collection_scheisse = new ContactCollection(
+            Auth::user()->account->contacts()
+                ->with('organization')
+                ->orderByName()
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate()
+                ->appends(Request::all())
+        );
+
         return Inertia::render('Contacts/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'contacts' => new ContactCollection(
-                Auth::user()->account->contacts()
-                    ->with('organization')
-                    ->orderByName()
-                    ->filter(Request::only('search', 'trashed'))
-                    ->paginate()
-                    ->appends(Request::all())
-            ),
+            'contacts' => $collection_scheisse
         ]);
     }
 

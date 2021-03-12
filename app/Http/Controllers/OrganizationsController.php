@@ -16,6 +16,7 @@ class OrganizationsController extends Controller
 {
     public function index()
     {
+
         return Inertia::render('Organizations/Index', [
             'filters' => Request::all('search', 'trashed'),
             'organizations' => new OrganizationCollection(
